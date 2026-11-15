@@ -1,0 +1,51 @@
+import { describe, equal, expect, it } from "typroof";
+
+import type { _Mul10Pow } from "./_Mul10Pow";
+import type { _Parse } from "./_Parse";
+import type { _Stringify } from "./_Stringify";
+
+describe("_Mul10Pow", () => {
+  it("should multiply an integer by 10 raised to the power of `Pow`", () => {
+    expect<_Stringify<_Mul10Pow<_Parse<"0">, _Parse<"0">>>>().to(equal<"0">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0">, _Parse<"1">>>>().to(equal<"0">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0">, _Parse<"2">>>>().to(equal<"0">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0">, _Parse<"3">>>>().to(equal<"0">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.1">, _Parse<"0">>>>().to(equal<"0.1">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.1">, _Parse<"1">>>>().to(equal<"1">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.1">, _Parse<"2">>>>().to(equal<"10">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.1">, _Parse<"3">>>>().to(equal<"100">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.01">, _Parse<"0">>>>().to(equal<"0.01">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.01">, _Parse<"1">>>>().to(equal<"0.1">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.01">, _Parse<"2">>>>().to(equal<"1">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.123">, _Parse<"0">>>>().to(equal<"0.123">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.123">, _Parse<"1">>>>().to(equal<"1.23">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.123">, _Parse<"2">>>>().to(equal<"12.3">);
+    expect<_Stringify<_Mul10Pow<_Parse<"0.123">, _Parse<"3">>>>().to(equal<"123">);
+    expect<_Stringify<_Mul10Pow<_Parse<"7">, _Parse<"0">>>>().to(equal<"7">);
+    expect<_Stringify<_Mul10Pow<_Parse<"7">, _Parse<"1">>>>().to(equal<"70">);
+    expect<_Stringify<_Mul10Pow<_Parse<"7">, _Parse<"2">>>>().to(equal<"700">);
+    expect<_Stringify<_Mul10Pow<_Parse<"7">, _Parse<"3">>>>().to(equal<"7000">);
+    expect<_Stringify<_Mul10Pow<_Parse<"42">, _Parse<"0">>>>().to(equal<"42">);
+    expect<_Stringify<_Mul10Pow<_Parse<"42">, _Parse<"1">>>>().to(equal<"420">);
+    expect<_Stringify<_Mul10Pow<_Parse<"42">, _Parse<"2">>>>().to(equal<"4200">);
+    expect<_Stringify<_Mul10Pow<_Parse<"42">, _Parse<"3">>>>().to(equal<"42000">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"0">>>>().to(equal<"34.56">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"1">>>>().to(equal<"345.6">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"2">>>>().to(equal<"3456">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"3">>>>().to(equal<"34560">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"4">>>>().to(equal<"345600">);
+    expect<_Stringify<_Mul10Pow<_Parse<"34.56">, _Parse<"5">>>>().to(equal<"3456000">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"0">>>>().to(equal<"-78.9">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"1">>>>().to(equal<"-789">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"2">>>>().to(equal<"-7890">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"3">>>>().to(equal<"-78900">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"4">>>>().to(equal<"-789000">);
+    expect<_Stringify<_Mul10Pow<_Parse<"-78.9">, _Parse<"5">>>>().to(equal<"-7890000">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"0">>>>().to(equal<"123.456">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"1">>>>().to(equal<"1234.56">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"2">>>>().to(equal<"12345.6">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"3">>>>().to(equal<"123456">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"4">>>>().to(equal<"1234560">);
+    expect<_Stringify<_Mul10Pow<_Parse<"123.456">, _Parse<"5">>>>().to(equal<"12345600">);
+  });
+});

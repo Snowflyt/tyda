@@ -1,0 +1,18 @@
+{
+  "name": "@tyda/typroof-plugin",
+  "private": true,
+  "description": "Typroof plugin for Tyda’s internal use for type testing",
+  "homepage": "https://github.com/Snowflyt/tyda/tree/main/typroof-plugin",
+  "bugs": {
+    "url": "https://github.com/Snowflyt/tyda/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snowflyt/tyda.git"
+  },
+  "license": "MPL-2.0",
+  "author": "Ge Gao (Snowflyt) <gaoge011022@gmail.com>",
+  "type": "module",
+  "main": "./index.js",
+  "types": "./index.d.ts"
+}

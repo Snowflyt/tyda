@@ -1,0 +1,42 @@
+{
+  "name": "@tyda/array",
+  "version": "0.0.0-dev.20261116",
+  "private": true,
+  "description": "Array and tuple utilities (Map, Head, Tail, IsTuple, ...) for Tyda, a composable type-level programming toolkit for TypeScript.",
+  "keywords": [
+    "type gymnastics",
+    "type level",
+    "type safe",
+    "generic",
+    "generic programming",
+    "functional programming",
+    "fp",
+    "hkt",
+    "higher kinded type",
+    "type level programming"
+  ],
+  "homepage": "https://github.com/Snowflyt/tyda/tree/main/packages/array",
+  "bugs": {
+    "url": "https://github.com/Snowflyt/tyda/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Snowflyt/tyda.git"
+  },
+  "license": "MPL-2.0",
+  "author": "Ge Gao (Snowflyt) <gaoge011022@gmail.com>",
+  "type": "module",
+  "types": "./src/index.d.ts",
+  "scripts": {
+    "prebuild": "npm run clean",
+    "build": "tsc --noEmit && npm run link-workspace && cpy \"src/**/*.ts\" \"!src/**/*.test.ts\" dist && renamer --find .ts --replace .d.ts \"dist/**\" && replace-in-file \"/ *\\/\\/ eslint-disable-next-line [^\\n]+\\n/g\" \"\" dist/** --isRegex && replace-in-file \"/ *\\/\\* eslint-(disable|enable) [^\\n]+ \\*\\/\\n/g\" \"\" dist/** --isRegex && prettier --log-level=silent --write ./dist/ --ignore-path !dist/ && cpy package.json dist && json -I -f dist/package.json -e \"this.types = './index.d.ts'; delete this.private; delete this.scripts\" && node -e \"import fs from 'node:fs'; fs.copyFileSync('README.md', 'dist/README.md'); fs.copyFileSync('../../LICENSE', 'dist/LICENSE'); fs.copyFileSync('../../COMMERCIAL_LICENSE.md', 'dist/COMMERCIAL_LICENSE.md')\"",
+    "clean": "rimraf dist",
+    "link-workspace": "node -e \"import * as fs from 'node:fs/promises'; import * as path from 'node:path'; import rootPackageJSON from '../../package.json' with { type: 'json' }; const workspaces = await Promise.all(rootPackageJSON.workspaces.filter((folder) => folder !== 'packages/tyda' && folder !== 'typroof-plugin').map((folder) => path.join('..', '..', folder, 'package.json')).map((pathname) => fs.readFile(pathname, 'utf-8').then((packageJSONString) => ({ pathname, ...JSON.parse(packageJSONString) })))); for (const workspacePackageJSON of [workspaces.find(({ name }) => name === '@tyda/core')]) { if (!workspacePackageJSON.dependencies) continue; const { dependencies, pathname } = workspacePackageJSON; let updated = false; for (const dependencyName of Object.keys(dependencies)) { const dependencyPackageJSON = workspaces.find(({ name }) => name === dependencyName); if (!dependencyPackageJSON) continue; if (dependencies[dependencyName] === dependencyPackageJSON.version || dependencies[dependencyName] === `^${dependencyPackageJSON.version}`) continue; updated = true; workspacePackageJSON.dependencies[dependencyName] = '^' + dependencyPackageJSON.version; console.log('Updated `' + workspacePackageJSON.name + '`’s dependency `' + dependencyName + '` to `^' + dependencyPackageJSON.version + '`'); } if (updated) await fs.writeFile(pathname, JSON.stringify(Object.fromEntries(Object.entries(workspacePackageJSON).filter(([key]) => key !== 'pathname')), null, 2) + '\\n', 'utf-8'); }\"",
+    "test": "tsc --noEmit && typroof --config ../../typroof.config.ts"
+  },
+  "dependencies": {
+    "@tyda/core": "0.0.0-dev.20261116",
+    "@tyda/typeclass": "0.0.0-dev.20261116",
+    "hkt-core": "^1.3.5"
+  }
+}
